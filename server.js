@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const cookiParser = require("cookie-parser");
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -11,6 +12,7 @@ connectDB();
 
 // middleware qui permet de traiter les données de la requetes
 app.use(express.json());
+app.use(cookiParser());
 app.use(express.urlencoded({ extended: false }));
 
 //autorisation cors
