@@ -93,7 +93,7 @@ module.exports = {
           .json({ message: "user not found please signup" });
       }
 
-      //check if password ids correct
+      //check if password is correct
       const validPassword = await bcrypt.compare(password, user.password);
 
       //generate Token
@@ -125,7 +125,7 @@ module.exports = {
       }
       if (!validPassword)
         // return to the user that the password is invalid
-        return res.status(400).json({ message: "Invalimail or password" });
+        return res.status(400).json({ message: "Invalid mail or password" });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -161,7 +161,7 @@ module.exports = {
     return res.status(400).json({ message: "user not found" });
   },
 
-  //get status user
+  //get status user for tchek if user is connect or not
   async loginStatus(req, res) {
     const token = req.cookies.token;
     if (!token) {
