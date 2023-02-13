@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 // const asyncHandler = require("express-async-handler");
 const authMiddleware = require("./middleWare/authMiddleware");
 const sgMail = require("@sendgrid/mail");
+const path = require("path");
 
 const app = express();
 
@@ -16,7 +17,6 @@ connectDB();
 // middleware qui permet de traiter les données de la requetes
 app.use(express.json());
 app.use(cookiParser());
-// app.use(authMiddleware);
 app.use(express.urlencoded({ extended: false }));
 
 //autorisation cors
@@ -33,7 +33,10 @@ app.get("/", (req, res) => {
   res.send("Home Page");
 });
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 app.use("/api/users", require("./routes/user.routes"));
+app.use("/api/products", require("./routes/product.routes"));
 
 // lancer le server
 app.listen(port, () => console.log("le serveur à démarré au port " + port));
