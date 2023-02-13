@@ -6,6 +6,7 @@ const cookiParser = require("cookie-parser");
 const port = process.env.PORT || 5000;
 // const asyncHandler = require("express-async-handler");
 const authMiddleware = require("./middleWare/authMiddleware");
+const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
@@ -28,7 +29,10 @@ app.use(
 );
 
 //nos routes
-// app.use("/", require("./routes/stoker.routes"));
+app.get("/", (req, res) => {
+  res.send("Home Page");
+});
+
 app.use("/api/users", require("./routes/user.routes"));
 
 // lancer le server

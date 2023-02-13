@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
 /*this function allows you to check if the user is logged in or not 
-to give him access to the user account */
+to give him access to the user information */
 module.exports.protect = async (req, res, next) => {
   try {
     const token = req.cookies.token;
