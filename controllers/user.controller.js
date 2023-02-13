@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
+const userModel = require("../models/user.model");
 
 //function for generate Token
 const generateToken = (id) => {
@@ -329,6 +330,31 @@ module.exports = {
 
   // Reset Password
   async resetPassword(req, res) {
-    return res.send("reset password");
+    const { password } = req.body;
+    const { resetToken } = req.params;
+
+    //hash token ,then compare to token in DB
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    // fIND tOKEN in DB
+    const userToken = await Token.findOne({
+      token: hashedToken,
+      expiresAt: { $gt: Date.now() },
+    });
+
+    if (!userToken) {
+      return res.status(404).json({ message: "Invalid or Expired Token" });
+    }
+
+    // Find user
+    const user = await userModel.findOne({ _id: userToken.userId });
+    user.password = password;
+    await user.save();
+    res.status(200).json({
+      message: "Password Reset Successful, Please Login",
+    });
   },
 };
