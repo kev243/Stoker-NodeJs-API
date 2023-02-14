@@ -34,9 +34,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use("/api/users", require("./routes/user.routes"));
 app.use("/api/products", require("./routes/product.routes"));
+app.use("/api/contactus", require("./routes/contact.routes"));
 
 // lancer le server
 app.listen(port, () => console.log("le serveur à démarré au port " + port));
