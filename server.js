@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 //autorisation cors
 app.use(
   cors({
-    origin: "https://stoker-front-react-js.vercel.app",
+    origin: "https://main.d2rym53t4vyd7h.amplifyapp.com",
     credentials: true,
     optionsSuccessStatus: 200,
   })
