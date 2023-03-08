@@ -24,6 +24,7 @@ app.use(
   cors({
     origin: "https://stoker-app.vercel.app",
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
