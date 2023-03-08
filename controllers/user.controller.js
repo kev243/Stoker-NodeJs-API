@@ -350,7 +350,7 @@ module.exports = {
     }
 
     // Find user
-    const user = await userModel.findOne({ _id: userToken.userId });
+    const user = await UserModel.findOne({ _id: userToken.userId });
     user.password = password;
     await user.save();
     res.status(200).json({
