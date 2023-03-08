@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 //autorisation cors
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://stoker-app.vercel.app/"],
+    origin: "https://stoker-app.vercel.app",
     credentials: true,
   })
 );
