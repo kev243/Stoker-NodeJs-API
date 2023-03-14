@@ -1,6 +1,9 @@
 const Product = require("../models/product.model");
 const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
+const stripe = require("stripe")(
+  "sk_test_51HXWQCJsArtUj9Nn0vwthvKMizWPUG5WKTNXlH71yyGNomlIcacyoE1tmWUEwJgG1w5flHk7Db1kGfeP498luW3i00ARgBP8G9"
+);
 
 module.exports = {
   //create product
@@ -164,5 +167,27 @@ module.exports = {
       }
     );
     return res.status(200).json(updatedProduct);
+  },
+
+  async checkout(req, res) {
+    // const { price, quantity } = req.body;
+    const session = await stripe.checkout.sessions.create({
+      lineItems: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "T-shirt",
+            },
+            unit_amount: 2000,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: "http://localhost:4242/success",
+      cancel_url: "http://localhost:4242/cancel",
+    });
+    res.redirect(303, session.url);
   },
 };

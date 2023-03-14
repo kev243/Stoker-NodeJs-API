@@ -7,6 +7,7 @@ const {
   getSingleProduct,
   deleteProduct,
   updateProduct,
+  checkout,
 } = require("../controllers/product.controller");
 const { upload } = require("../utils/fileUpload");
 
@@ -17,5 +18,6 @@ router.get("/", controller.protect, getProduct);
 router.get("/:id", controller.protect, getSingleProduct);
 router.delete("/:id", controller.protect, deleteProduct);
 router.patch("/:id", controller.protect, upload.single("image"), updateProduct);
+router.post("/create-checkout-session", checkout);
 
 module.exports = router;
