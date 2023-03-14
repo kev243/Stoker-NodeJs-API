@@ -13,7 +13,7 @@ const { upload } = require("../utils/fileUpload");
 
 const router = express.Router();
 
-router.post("/", upload.single("image"), createProduct);
+router.post("/", controller.protect, upload.single("image"), createProduct);
 router.get("/", controller.protect, getProduct);
 router.get("/:id", controller.protect, getSingleProduct);
 router.delete("/:id", controller.protect, deleteProduct);
