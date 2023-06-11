@@ -58,8 +58,8 @@ module.exports = {
         path: "/",
         httpOnly: true,
         expires: new Date(Date.now() + 1000 * 86400), //for one day
-        sameSite: "none",
-        secure: true,
+        // sameSite: "none",
+        // secure: true,
       });
 
       if (user) {
