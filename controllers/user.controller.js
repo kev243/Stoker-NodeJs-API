@@ -108,10 +108,10 @@ module.exports = {
       if (validPassword) {
         res.cookie("token", token, {
           path: "/",
-          httpOnly: false,
-          expires: new Date(Date.now() + 1000 * 86400), //for one day
-          // sameSite: "none",
-          // secure: true,
+          httpOnly: true,
+          secure: true, // Spécifie que le cookie doit être envoyé uniquement via HTTPS
+          sameSite: "none", // Permet d'envoyer le cookie à partir d'un domaine différent
+          expires: new Date(Date.now() + 1000 * 86400), //pour un jour
         });
       }
 
