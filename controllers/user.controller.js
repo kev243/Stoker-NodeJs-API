@@ -56,7 +56,7 @@ module.exports = {
       //send HTTP-only cookie
       res.cookie("token", token, {
         path: "/",
-        httpOnly: true,
+        httpOnly: false,
         expires: new Date(Date.now() + 1000 * 86400), //for one day
         // sameSite: "none",
         // secure: true,
@@ -108,7 +108,7 @@ module.exports = {
       if (validPassword) {
         res.cookie("token", token, {
           path: "/",
-          httpOnly: true,
+          httpOnly: false,
           expires: new Date(Date.now() + 1000 * 86400), //for one day
           // sameSite: "none",
           // secure: true,
