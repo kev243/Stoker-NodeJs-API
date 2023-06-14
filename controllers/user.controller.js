@@ -142,8 +142,8 @@ module.exports = {
         path: "/",
         httpOnly: true,
         expires: new Date(0),
-        // sameSite: "none",
-        // secure: true,
+        secure: true, // Spécifie que le cookie doit être envoyé uniquement via HTTPS
+        sameSite: "none", // Permet d'envoyer le cookie à partir d'un domaine différent
       });
 
       return res.status(200).json({ message: "successfully logged out" });
